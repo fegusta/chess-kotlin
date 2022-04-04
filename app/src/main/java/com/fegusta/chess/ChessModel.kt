@@ -4,8 +4,8 @@ class ChessModel {
 
     override fun toString(): String {
         var desc = " \n"
-        for (row in 0..7){
-            desc += "${(7 - row)}"
+        for (row in 7 downTo 0){
+            desc += "$row"
             for (col in 0..7) {
                 desc += " ."
             }
