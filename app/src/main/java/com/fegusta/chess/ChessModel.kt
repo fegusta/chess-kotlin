@@ -5,8 +5,32 @@ class ChessModel {
     var pieceBox = mutableSetOf<ChessPiece>()
 
     init {
-        pieceBox.add(ChessPiece(0,0,ChessPlayer.WHITE, ChessRank.ROOK))
-        pieceBox.add(ChessPiece(0,7,ChessPlayer.BLACK, ChessRank.ROOK))
+        reset()
+    }
+
+    private fun reset() {
+        pieceBox.removeAll(pieceBox)
+        for (i in 0..1) {
+            pieceBox.add(ChessPiece(0 + i * 7,0,ChessPlayer.WHITE, ChessRank.ROOK))
+            pieceBox.add(ChessPiece(0 + i * 7,7,ChessPlayer.BLACK, ChessRank.ROOK))
+
+            pieceBox.add(ChessPiece(1 + i * 5,0,ChessPlayer.WHITE, ChessRank.KNIGHT))
+            pieceBox.add(ChessPiece(1 + i * 5,7,ChessPlayer.BLACK, ChessRank.KNIGHT))
+
+            pieceBox.add(ChessPiece(2 + i * 3,0,ChessPlayer.WHITE, ChessRank.BISHOP))
+            pieceBox.add(ChessPiece(2 + i * 3,7,ChessPlayer.BLACK, ChessRank.BISHOP))
+        }
+
+        for (i in 0..7) {
+            pieceBox.add(ChessPiece(i,1,ChessPlayer.WHITE, ChessRank.PAWN))
+            pieceBox.add(ChessPiece(i,6,ChessPlayer.BLACK, ChessRank.PAWN))
+        }
+
+        pieceBox.add(ChessPiece(3,0,ChessPlayer.WHITE, ChessRank.QUEEN))
+        pieceBox.add(ChessPiece(3,7,ChessPlayer.BLACK, ChessRank.QUEEN))
+
+        pieceBox.add(ChessPiece(4,0,ChessPlayer.WHITE, ChessRank.KING))
+        pieceBox.add(ChessPiece(4,7,ChessPlayer.BLACK, ChessRank.KING))
     }
 
     fun pieceAt(col: Int, row: Int) : ChessPiece? {
