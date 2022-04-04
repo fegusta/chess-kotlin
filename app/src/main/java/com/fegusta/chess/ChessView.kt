@@ -33,9 +33,26 @@ class ChessView(context: Context?, attrs: AttributeSet?) : View(context, attrs) 
 
     override fun onDraw(canvas: Canvas?) {
         drawChessboard(canvas)
+        drawPieces(canvas)
+    }
 
-        val whiteQueenBitmap = bitmaps[R.drawable.bishop_black]!!
-        canvas?.drawBitmap(whiteQueenBitmap, null, Rect(0,0,600,600), paint)
+    private  fun drawPieces(canvas: Canvas?) {
+        val chessModel = ChessModel()
+        chessModel.reset()
+
+        for (row in 0..7) {
+            for (col in 0..7){
+                val piece = chessModel.pieceAt(col, row)
+                if (piece != null) {
+                    drawPieceAt(canvas, col, row, piece.resID)
+                }
+            }
+        }
+    }
+
+    private fun drawPieceAt(canvas: Canvas?, col: Int, row: Int, resID: Int) {
+        val bitmap = bitmaps[resID]!!
+        canvas?.drawBitmap(bitmap, null, RectF(originX + col * cellSide, originY + (7 - row) * cellSide, originX + (col + 1) * cellSide, originY + ((7 - row) + 1) * cellSide), paint)
     }
 
     private fun loadBitmaps() {
